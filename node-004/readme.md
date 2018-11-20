@@ -180,3 +180,5 @@ new js_demo(app).init();
 
 **问题1：**目前自己的gulp框架适合纯JS工程，那么gulp如何引入express的服务？
 
+* 这个问题已经解决了。见下面的demo
+
