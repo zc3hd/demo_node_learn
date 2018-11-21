@@ -24,10 +24,6 @@ var server = http.createServer(function(req,res){
     res.end()
 });
 server.listen(3000,'127.0.0.1');
-
-
-
-
 ```
 
 * 读取文件进行响应
@@ -72,7 +68,7 @@ true后面就可以把查询的部分变为对象。
 #### 1.2接受post请求
 
 ##### 一般的post
-* post的请求参数是在**请求报文的体**里面；
+* post的请求参数是在 **请求报文的体** 里面；
 * node的服务器是以片段字符串的形式进行接收数据,一个小段一个小段的接受，就是异步的。所以node的事件环机制就会给别的用户进行服务。
 ```
 var all_str = '';
@@ -110,14 +106,7 @@ http.createServer(function(req, res) {
   }
 
   // 页面表单前端设置enctype="multipart/form-data"，前端要注意。
-  res.writeHead(200, {'content-type': 'text/html'});
-  res.end(
-    '<form action="/upload" enctype="multipart/form-data" method="post">'+
-    '<input type="text" name="title"><br>'+
-    '<input type="fil e" name="upload" multiple="multiple"><br>'+
-    '<input type="submit" value="Upload">'+
-    '</form>'
-  );
+  <form action="/upload" enctype="multipart/form-data" method="post">
 
 }).listen(8080);
 ```

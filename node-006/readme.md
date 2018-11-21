@@ -1,4 +1,4 @@
-# mongoDB 
+# mongoDB
 
 * 非结构性数据库，面向对象写的，无法挑战老牌数据库，NOSQL。
 * SQL 数据库/表/行（就是一条条的数据，键值对）
@@ -31,8 +31,7 @@ mongod --dbpath C:\dev\mongoDB_data\test
 【mongoVUE 数据库开机】
 mongod --storageEngine mmapv1 --dbpath C:\dev\mongoDB_data\cc_datas
 ```
-* 开会就是所有数据库存放的位置
-* 里面的dbs，就是真正数据库的名称
+* C:\dev\mongoDB_data\test就是所有数据库存放的位置，可以任意设置。里面的dbs，就是真正数据库的名称。
 
 
 ### 3.指令[shell版]
@@ -49,12 +48,6 @@ db
 
 show collections
 --列出所有的集合
-
-db.student.insert({"name":"add"})
---给集合插入数据。或新的集合插入数据
-
-db.student.find()
---查看集合里的所有数据
 
 db.dropDatabase();
 --删除当前数据库
@@ -93,7 +86,7 @@ db.student.find({"obj.key_1":"val_1","key_2":"val_2"})
 db.student.find({"obj.key_1":{$gt:30}},"key_2":"val_2"})
 
 【或者条件寻找】寻找的条件写入 数组中。
-db.student.find($or:[{"key_1":1,"key_2":2}])
+db.student.find($or:[{"key_1":1},{"key_2":2}])
 
 【直接找val为数组里元素的数据】
 db.student.find({"arr_key":"val"})
@@ -103,6 +96,19 @@ db.student.find({"arr_key":"val"})
 ```
 【先按前面的排正序，一样时，再按第二属性进行排负序】
 db.student.find().sort({"key_1":1,"key_2":-1})
+```
+
+* 分页
+```
+db.student.find(json).skip(skipnumber).limit(limit)
+```
+
+* 集合的信息(数据个数等属性)
+```
+db.student.stats();
+
+【数量】
+db.student.find().count();
 ```
 
 #### 修改
@@ -134,14 +140,12 @@ db.some_collection.drop();
 【集合下的文档全部被删除】
 db.student.remove({})
 
-【删除一个数据（文档），默认删除一个】
+【删除一个数据（文档），默认删除多个】
 db.student.remove({"name":'xiaom'},{})
 
 【删除一个数据（文档），删除一个】
 db.restaurants.remove( { "borough": "Queens" }, { justOne: true } )
 ```
-
-
 
 ### 4.mongoVUE 可视化
 

@@ -1,4 +1,4 @@
-# mongoDB node
+# mongoDB node版本
 
 ### 基本使用
 
@@ -7,7 +7,7 @@
 npm install mongodb
 ```
 
-* 这里是DB在node端作为用户端向mongoDB数据库发出请求，然后有响应，是个回调。使用：
+* 这里是DB在node端作为用户端向mongoDB数据库发出请求，有响应，是个回调。使用：
 ```
 var MongoClient = require('mongodb').MongoClient;
 
@@ -73,6 +73,7 @@ exports.insertOne = function(collectionName, json, callback) {
 
 ### 新增
 
+* insertOne
 ```
 db
   .collection(collectionName)
@@ -84,6 +85,8 @@ db
 
 ### 查找
 
+* 查询条件和shell版一毛一样。
+* 分页、排序、游标
 ```
 【游标】
 var result = []; //结果数组
@@ -91,8 +94,8 @@ var result = []; //结果数组
 var cursor = db
                .collection(collectionName)
                .find(json)
-               .skip(skipnumber)
-               .limit(limit)
+               .skip(skipnumber)【跳过多少】
+               .limit(limit)【读取多少】
                .sort(sort);
 
 【查到的游标结果进行遍历】
@@ -114,3 +117,77 @@ cursor.each(function(err, doc) {
 
 ```
 
+### 修改
+
+```
+db
+  .collection(collectionName)
+  .updateMany(
+    json1,
+    json2,
+    function (err, results) {
+        callback(err, results);
+        db.close();
+  });
+
+
+使用：
+  {
+    "borough":"Manhattan"       //改什么
+  },
+  {
+    $set: { borough: "北京" }     //怎么改
+  },
+```
+
+### 删除
+
+```
+db
+  .collection(collectionName)
+  .deleteMany(
+    json,
+    function (err, results) {
+      callback(err, results);
+      db.close();
+    }
+  );
+```
+
+### 读取总数
+
+```
+db
+  .collection(collectionName)
+  .count({})
+  .then(function(count) {
+      callback(count);
+      db.close();
+  });
+```
+
+
+### 数据库地址配置项
+
+```
+module.exports = {
+    "dburl" : "mongodb://localhost:27017/haha"
+}
+```
+
+* 这个数据库haha其实就是我们项目下的数据库。
+* 每个api模块对应的数据库里的一个集合的名字，可以在这个api模块上进行全局配置集合的名称！
+
+### 项目
+
+* 数据唯一ID：index的包装
+```
+var ObjectId = require('mongodb').ObjectID;
+
+{"_id":ObjectId(id)}
+```
+
+* 重定向
+```
+res.redirect("/");
+```

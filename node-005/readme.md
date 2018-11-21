@@ -9,9 +9,9 @@
 
 * nodemon可以执行我写的express服务。里面写提供静态服务的api服务
 * nodemon能监视目录下的所有文件，看下面的配置项，去除静态文件的两个，其他都会监听，有变化就会重新启动我的express的app.js
-* 需要好好看看var nodemon = require('gulp-nodemon');
 
 ```
+var nodemon = require('gulp-nodemon');
 nodemon({
     script: './api_server/app.js',
     ignore : [
@@ -24,7 +24,7 @@ nodemon({
 
 ### gulp第2个任务
 
-* 启动本地的代理服务器，啥是代理服务器，就是在3000的启动的服务，在4000完全可以访问
+* 启动本地的代理服务器，就是在3000的启动的服务，在4000端口的静态页面的异步请求完全可以访问3000端口的API
 
 ```
   browserSync.init({
@@ -36,15 +36,14 @@ nodemon({
   });
 ```
 
-* 这个代理服务器，可以根据gulp压缩的流进行自动重启界面。
-* 所以就是实现了：
+* 这个代理服务器，可以根据gulp监听文件变化而形成的压缩流，进行自动刷新浏览器，所以就是实现了：
 
 ```
-1.真实服务器提供API，和静态资源
-2.nodemon 监听真实服务器，以进行重启
+1.真实服务器提供API，和静态资源【node提供】
+2.nodemon 监听真实服务器，以进行重启【nodemon开启服务和监听node的文件】
 
-3.代理服务器==真实服务器
-4.gulp针对功能模块的监听，静态页面进行重载，代理服务器进行reload
+3.代理服务器==真实服务器【browserSync开启代理】
+4.gulp针对功能模块的监听，静态页面进行重载，代理服务器进行reload【browserSync的reload】
 ```
 
 * 需要学习browserSync

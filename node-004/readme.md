@@ -54,7 +54,7 @@ app.get("/admin/login",function(req,res){
 ```
 
 * 解决方式1：就是把下面的放在上面，越具体越上面放
-* 方法2:就是加入next参数
+* 解决方法2:就是加入next参数
 ```
 app.get("/:username/:id",function(req,res,next){
     var username = req.params.username;
@@ -135,8 +135,7 @@ app.post("/",function(req,res){
 ##### 实战项目
 
 * 自己使用，绝不会使用ejs模板引擎，前后端分离，node只是提供后台的路由API功能。
-* 项目的目录：目标是为了和vue-webpack-express前后一起开发
-* 现在把demo-webpack-003中vue打包后的webapp全部拿过来。
+* 项目的目录：目标是为了和vue-webpack-express前后一起开发，现在把demo-webpack-003中vue打包后的webapp全部拿过来。
 
 ```
 webapp 【里面就是各个模块的文件】
@@ -178,7 +177,7 @@ var js_demo = require('./js_demo/index.js');
 new js_demo(app).init();
 ```
 
-**问题1：**目前自己的gulp框架适合纯JS工程，那么gulp如何引入express的服务？
-
-* 这个问题已经解决了。见下面的demo
+### 问题1：
+* 1.目前自己的gulp框架适合纯JS工程，那么gulp如何引入express的服务？就是前端用gulp进行实时编译，后台用node
+* 答：这个问题已经解决了。见下面的demo
 
