@@ -147,6 +147,24 @@ db.student.remove({"name":'xiaom'},{})
 db.restaurants.remove( { "borough": "Queens" }, { justOne: true } )
 ```
 
+#### index索引
+
+* 设置name为该集合的正向的索引。
+```
+db.student.createIndex({"name":1});
+```
+* 好处：这样会加快搜索的速度。
+* 缺点：就是插入一个数据变慢了。
+* 没有大量的插入业务，就可以用这个。
+
+* 这个字段为索引，然后这个字段的值必须唯一。每个文档都是唯一的。
+```
+db.members.createIndex( { "user_id": 1 }, { unique: true } );
+```
+
+
+
+
 ### 4.mongoVUE 可视化
 
 * IP：127.0.0.1  port:27017

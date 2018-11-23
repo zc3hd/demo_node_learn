@@ -4,7 +4,7 @@
 
 * 下载
 ```
-npm install mongodb
+npm install mongodb@2.0.43
 ```
 
 * 这里是DB在node端作为用户端向mongoDB数据库发出请求，有响应，是个回调。使用：
@@ -18,7 +18,7 @@ app.get("/",function(req,res){
     
     //连接数据库
     MongoClient.connect(url, function(err, db) {
-
+        
         //插入数据，集合如果不存在，也没有关系，程序会帮你创建
         db.collection('student').insertOne({
             "name" : "哈哈",
@@ -96,7 +96,7 @@ var cursor = db
                .find(json)
                .skip(skipnumber)【跳过多少】
                .limit(limit)【读取多少】
-               .sort(sort);
+               .sort({"key_1":1,"key_2":-1});
 
 【查到的游标结果进行遍历】
 cursor.each(function(err, doc) {
@@ -166,17 +166,37 @@ db
   });
 ```
 
+### index索引
+
+* 初始化的时候执行一次就行,用法就是保证那个字段不能重复吧。
+```
+db.collection('student').createIndex(
+  { "name": 1 },
+
+  {unique: true},
+  function(err, results) {
+    console.log(results);
+    callback();
+  }
+);
+```
+
+### 没有外键，叫聚合
+
+* 一个表的数据的一个字段，链接着另外一个表的一条数据。
+
 
 ### 数据库地址配置项
 
 ```
+【这就是选择了数据库（已经是开机在某个具体的文件夹路径，里面是好多数据库）】
 module.exports = {
-    "dburl" : "mongodb://localhost:27017/haha"
+    "dburl" : "mongodb://localhost:27017/test"
 }
 ```
 
-* 这个数据库haha其实就是我们项目下的数据库。
-* 每个api模块对应的数据库里的一个集合的名字，可以在这个api模块上进行全局配置集合的名称！
+* 这个数据库test其实就是我们目录下，项目的数据库。
+
 
 ### 项目
 
@@ -190,4 +210,122 @@ var ObjectId = require('mongodb').ObjectID;
 * 重定向
 ```
 res.redirect("/");
+```
+
+* 注意各使用的版本号
+```
+"body-parser": "^1.14.0",
+"express": "^4.16.4",
+"mongodb": "^2.0.43"
+```
+
+* 其实到了这最重要的就是DAO层的封装了。这里形成个简单的增删改查。目录结构：
+```
+-api_server
+  -moudules
+     -demo_1
+   -scripts
+     --db.js
+
+
+_webapp
+  -moudules
+     -demo_1
+   -scripts
+```
+
+* 可以看到后台的api提供的模块方式完全是按照前端的功能模块进行提供，这样前后都好维护，不要和我说什么MVC，都是扯淡，适合自己才是最好的。
+
+#### 1. db.js【dao层的封装】面向对象写法
+```
+function Data() {
+  var me = this;
+  var mongodb = require('mongodb');
+}
+Data.prototype = {};
+module.exports = Data;
+```
+
+#### 2. dao层 在api模块中调用：
+```
+var Data = require('../../scripts/db.js');
+
+function JS_demo(app) {
+  var me = this;
+  me.app = app;
+  
+  【被调用封装的db，挂载全局】
+  me.data = new Data();
+}
+JS_demo.prototype = {};
+
+【api模块输出】
+module.exports = JS_demo;
+```
+
+#### 3.db.js【dao层的封装】连接、增删改查的promise的封装
+```
+  _connect: function() {
+    var me = this;
+    return new Promise(function(resolve, reject) {
+      me.MongoClient
+        .connect('mongodb://localhost:27017/test', function(err, db) {
+          resolve(db);
+        });
+    });
+  },
+    // 新增
+  add: function(collection_name, obj) {
+    var me = this;
+    return new Promise(function(resolve, reject) {
+      me._connect()
+        .then(function(db) {
+          db
+            .collection(collection_name)
+            .insertOne(obj, function(err, result) {
+
+              resolve(result);
+              db.close();
+            });
+        });
+    });
+  },
+```
+
+#### 4. api模块的路由设计和调用DAO层的函数
+
+```
+  init: function() {
+    var me = this;
+
+    【设计路由】
+    me.app.post('/api/demo_1/add.do', function(req, res) {
+      me._api_add(req, res);
+    });
+  },
+  【回调函数里直接使用】
+  _api_add: function(req, res) {
+    var me = this;
+    me.data
+      .add("json_arr", {
+        name: req.body.name,
+        info: req.body.age,
+      })
+      .then(function(result) {
+        res.send(result);
+      });
+  },
+```
+
+* 查找全部数据的时候，得到游标cursor，需要each遍历，不是forEach
+
+```
+cursor.each(function(err, doc) {
+  if (doc != null) {
+    arr.push(doc);
+  } else {
+    resolve(arr);
+    db.close();
+  }
+});
 ```

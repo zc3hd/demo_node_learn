@@ -125,6 +125,9 @@ app.use(function(req,res){
 * post需要使用body-parser，在req.body得到参数，文件上传使用formidable
 
 ```
+【bodyParser@1.14.0】
+var bodyParser = require('body-parser')
+
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post("/",function(req,res){
