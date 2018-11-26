@@ -179,8 +179,6 @@ me.Book_model
       });
 ```
 
-
-
 ##### 3.设置字段属性的唯一性
 * 比如要求用户名不能重复
 ```
@@ -221,4 +219,22 @@ me.Demo_model
   });
 ```
 
-* 至此，基本上都可以了，接下来就是项目了。以前项目的优化。
+
+------
+
+### Router的设计
+
+* 在api服务的模块中这样使用：
+```
+me.app = app;
+me.router = require('express').Router();
+
+me.router.post('/add.do', function(req, res) {
+  me._api_add(req, res);
+});
+
+me.app.use('/api/book',me.router);
+```
+
+* 至此，基本上就可以了，接下来就是项目。
+

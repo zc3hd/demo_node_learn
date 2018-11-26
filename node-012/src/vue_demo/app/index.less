@@ -1,0 +1,209 @@
+* {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Microsoft Yahei';
+  overflow: hidden;
+}
+
+li {
+  list-style: none;
+}
+
+// 左右边的大小
+@side_w: 26%;
+
+// 选择框的高度
+@sel_h: 24px;
+@sel_margin_top: 4px;
+
+// 主背景颜色
+@main_bgc:#123;
+// 子项的颜色
+@item_bgc:#000080;
+@item_title_color:#ffffff;
+
+/* 主页面 */
+
+.main_app {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-left: @side_w;
+  padding-right: @side_w;
+  position: relative;
+  background: @main_bgc;
+  // 左边
+  >.left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @side_w;
+    height: 100%;
+    // 下面的每一项
+    >.item {
+      width: 100%;
+      height: 33.32%;
+      box-sizing: border-box;
+      padding: 5px;
+      padding-left: 10px;
+      // 盒子
+      >.box {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: @item_bgc;
+        box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.03);
+        box-sizing: border-box;
+        padding-top: 32px;
+        // 顶部切换栏
+        >.top {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 32px;
+          >div {
+            height: 100%;
+            float: left;
+          }
+          // 只有标题
+          >.one_info {
+            width: 32%;
+            line-height: 32px;
+            font-size: 14px;
+            font-weight: 600;
+            color: @item_title_color;
+            box-sizing: border-box;
+            padding-left: 20px;
+          }
+        }
+        // ec表格
+        >.ec {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    // 所有的信息
+    >.all_info {
+      height: 40%;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 5px;
+      padding-left: 10px;
+      padding-top: 10px;
+    }
+    // 接入统计
+    >.jie_ru_info_time {
+      height: 30%;
+    }
+    // 基站信息统计
+    >.cors_info {
+      height: 30%;
+      padding-bottom: 10px;
+
+    }
+  }
+  // 右边
+  >.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: @side_w;
+    height: 100%;
+    // 下面的每一项
+    >.item {
+      width: 100%;
+      height: 33.32%;
+      box-sizing: border-box;
+      padding: 5px;
+      padding-right: 10px;
+      // 盒子
+      >.box {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: rgb(23, 38, 56);
+        background: @item_bgc;
+        box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.03);
+        box-sizing: border-box;
+        padding-top: 32px;
+        // 顶部切换栏
+        >.top {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 32px;
+        }
+        // ec表格
+        >.ec {
+          width: 100%;
+          height: 100%!important;
+        }
+      }
+    }
+    // 终端实时接入
+    >.shi_shi {
+      height: 35%;
+      padding-top: 10px;
+    }
+    // 一周终端数
+    >.yi_zhou {
+      height: 35%;
+    }
+    // 服务器状态
+    >.fu_wuqi {
+      width: 100%;
+      height: 30%;
+      box-sizing: border-box;
+      padding: 5px;
+      padding-bottom: 10px;
+      padding-right: 10px;
+    }
+  }
+  // 中间区域
+  >.main {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+
+/* 基站的有效率和延时 */
+.cors_status_hot,
+/* 服务器状态的 空闲率 爆表的dom */
+.server_hot {
+  width: 200px;
+  height: 26px;
+  background-color: rgba(0, 0, 0, 0.2);
+  >.item {
+    float: left;
+    height: 100%;
+    line-height: 26px;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  >.name {
+    width: 60%;
+    text-align: center;
+  }
+  >.info {
+    width: 40%;
+  }
+}
+
+.cors_status_hot {
+  width: 150px;
+}

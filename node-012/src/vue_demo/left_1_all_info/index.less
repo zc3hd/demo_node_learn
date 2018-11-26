@@ -1,0 +1,172 @@
+* {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+// 左右边的大小
+@side_w: 26%;
+// 选择框的高度
+@sel_h: 24px;
+@sel_margin_top: 4px;
+// 主背景颜色
+@main_bgc: #123;
+// 子项的颜色
+@item_bgc: #000080;
+@item_title_color: #ffffff;
+
+.box {
+  width: 100%;
+  height: 100%;
+  background: @item_bgc;
+  box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+  padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  >.main_box {
+    width: 100%;
+    height: 100%;
+    >.item_one {
+      width: 100%;
+      height: 12%;
+      position: relative;
+      color: @item_title_color;
+      >.info {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 16px;
+        width: 50%;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 16px;
+      }
+      >.sum {
+        position: absolute;
+        right: 20px;
+        bottom: -2px;
+        font-size: 30px;
+        height: 30px;
+        width: 80px;
+        line-height: 30px;
+        text-align: right;
+      }
+      >.ge {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: 16px;
+        width: 16px;
+        line-height: 16px;
+        font-size: 14px;
+      }
+    }
+    >.item_two {
+      width: 100%;
+      height: 25%;
+      color: @item_title_color;
+      >.top {
+        width: 100%;
+        height: 50%;
+        position: relative;
+        >.info {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 16px;
+          width: 50%;
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 16px;
+        }
+        >.sum {
+          position: absolute;
+          right: 20px;
+          bottom: -2px;
+          font-size: 30px;
+          height: 30px;
+          width: 80px;
+          line-height: 30px;
+          text-align: right;
+        }
+        >.ge {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          height: 16px;
+          width: 16px;
+          line-height: 16px;
+          font-size: 14px;
+        }
+      }
+      >.down {
+        width: 100%;
+        height: 50%;
+        position: relative;
+        >.style_line {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          height: 8px;
+          width: 100%;
+          transform: translate(-50%, -50%);
+          >.chi {
+            position: absolute;
+            right: 99%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            height: 18px;
+            width: 3px;
+            background: url('./img/chi.png') center center no-repeat;
+            background-size: cover;
+            transition: all 0.5s ease-in;
+          }
+          >.hui {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 8px;
+            width: 100%;
+            background-color: @main_bgc;
+            transition: all 0.5s ease-in;
+          }
+        }
+        // 终端
+        >.zhong_duan {
+          background: url('./img/zhong_duan.png') center center no-repeat;
+          background-size: cover;
+        }
+        // 终端
+        >.cors {
+          background: url('./img/cors.png') center center no-repeat;
+          background-size: cover;
+        }
+        // 终端
+        >.pingtai {
+          background: url('./img/pingtai.png') center center no-repeat;
+          background-size: cover;
+          >.chi {
+            right: 99%;
+          }
+          >.hui {
+            width: 100%;
+          }
+        }
+        >.line {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 1px;
+          width: 100%;
+          // background: url('./img/line.png') center center no-repeat;
+          // background-size: cover;
+          background-color: @main_bgc;
+        }
+      }
+    }
+    >.item_two_last {
+      height: 26%;
+    }
+  }
+}

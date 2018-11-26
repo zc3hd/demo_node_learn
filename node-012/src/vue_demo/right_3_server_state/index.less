@@ -1,0 +1,184 @@
+* {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Microsoft Yahei';
+  overflow: hidden;
+}
+
+// 左右边的大小
+@side_w: 26%;
+// 选择框的高度
+@sel_h: 24px;
+@sel_margin_top: 4px;
+// 主背景颜色
+@main_bgc: #123;
+// 子项的颜色
+@item_bgc: #000080;
+@item_title_color: #ffffff;
+
+
+
+// main
+.info_box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 32px;
+  background-color: @item_bgc;
+  // 标题
+  >.title {
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    font-weight: 600;
+    box-sizing: border-box;
+    padding-left: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: @item_title_color;
+    z-index: 10;
+  }
+  // 饼图
+  >.pie_box {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box!important;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: none;
+    >.box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      // ec的标题
+      >.title {
+        position: absolute;
+        font-size: 12px;
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        color: @item_title_color;
+        font-weight: 600;
+      }
+      >.ec {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        >div:nth-child(1) {
+          width: 100%!important;
+          height: 100%!important;
+          >canvas {
+            width: 100%!important;
+            height: 100%!important;
+          }
+        }
+        >div:nth-child(2) {
+          padding: 0!important;
+        }
+      }
+    }
+  }
+  // 第一个显示
+  >#box_0 {
+    display: block;
+  }
+
+
+
+  // 图例
+  >.demo {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 80px;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 32px;
+    >.demo_box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      >.box {
+        width: 100%;
+        /* height: 78px; */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        >.item {
+          width: 100%;
+          height: 26px;
+          box-sizing: border-box;
+          padding-left: 26px;
+          position: relative;
+          >.p {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 18px;
+            height: 18px;
+            border-radius: 100px;
+          }
+          >.info {
+            width: 100%;
+            height: 100%;
+            line-height: 26px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: @item_title_color;
+          }
+        }
+      }
+    }
+  }
+  // =================按钮
+  >.btn_box {
+    width: 30px;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 32px;
+    position: absolute;
+    top: 0;
+    >.box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      >.btn {
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        background-color: #603fc9;
+      }
+    }
+  }
+  >.left {
+    left: 0;
+    .btn {
+      background: url('./img/left.png') center center no-repeat;
+      background-size: cover;
+
+    }
+  }
+  >.right {
+    right: 0;
+    .btn {
+      background: url('./img/right.png') center center no-repeat;
+      background-size: cover;
+    }
+  }
+}

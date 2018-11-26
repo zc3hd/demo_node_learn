@@ -1,7 +1,13 @@
 function JS_demo(app) {
   var me = this;
+  
+  // 
   me.app = app;
+  // 路由
+  me.router = require('express').Router();
 
+
+  // 模型
   me.Book_model = require('../../collection/book_model.js');
   me.User_model = require('../../collection/user_model.js');
   me.Label_model = require('../../collection/label_model.js');
@@ -11,32 +17,32 @@ JS_demo.prototype = {
     var me = this;
 
     // add
-    me.app.post('/api/book/add.do', function(req, res) {
+    me.router.post('/add.do', function(req, res) {
       me._api_add(req, res);
     });
 
     // list
-    me.app.post('/api/book/list.do', function(req, res) {
+    me.router.post('/list.do', function(req, res) {
       me._api_list(req, res);
     });
 
     // edit
-    me.app.post('/api/book/edit.do', function(req, res) {
+    me.router.post('/edit.do', function(req, res) {
       me._api_edit(req, res);
     });
 
     // del
-    me.app.post('/api/book/del.do', function(req, res) {
+    me.router.post('/del.do', function(req, res) {
       me._api_del(req, res);
     });
 
     // del
-    me.app.post('/api/book/count.do', function(req, res) {
+    me.router.post('/count.do', function(req, res) {
       me._api_count(req, res);
     });
 
 
-
+    me.app.use('/api/book',me.router);
   },
   _api_count: function(req, res) {
     var me = this;
