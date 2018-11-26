@@ -1,0 +1,19 @@
+{
+  "name": "node-010",
+  "version": "1.0.0",
+  "description": "* 往后学习发现还是不一样的，不是我想象的那么简单，首先mongoose实例化的对象有很多自己的方法，这个就不一样了，无形中不用自己封装了，也不用操作db。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "node api_server/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.14.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.13"
+  },
+  "dependencies": {}
+}

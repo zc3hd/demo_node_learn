@@ -1,4 +1,4 @@
-# mongoose
+# mongoose step_1
 
 * JS对象和数据库产生关系的一个框架，操作对象就是就是操作数据库了。对象产生了，同时也持久化了。
 * JAVA思想中的SSH中的Hibernate
@@ -44,7 +44,7 @@ var studentSchema = new mongoose.Schema({
 });
 
 
-【静态方法】说的是静态方法，其实就是DOC文档的类方法么
+【静态方法】说的是静态方法，其实就是集合方法么
 studentSchema.statics.zhaoren = function(name, callback) {
     this.model('Student').find({name: name}, callback);
 };
@@ -82,6 +82,6 @@ Student.xiugai({"name":"小明"},{$set : {"age":30}},{},function(){
 
 ### 我的理解：
 * 和demo_7比较，其实就是分业务（api模块）操作数据库的集合。没有什么。
-* demo_7:因为所有操作数据库的集合的方法都写在db.js，好多api业务模块的的时候,可以写在一起。
-* 这个就是相当于单独写对应（api模块）的操作专门的集合的面向对象构造函数了。我感觉要和业务模块写在一起会更好点。
-* 唉~~没有什么嘛，写的那么神秘。总体感觉下拉其实感觉不如用DAO层的数据库更省代码。
+* demo_7:因为所有操作数据库的集合的方法都写在db.js，在好多api业务模块的时候,可以写在一起。
+* 这个就是相当于单独写对应（api模块）的操作专门的集合面向对象构造函数了。我感觉要和业务模块写在一起会更好点。
+* 唉~~没有什么嘛，写的那么神秘。总体感觉其实不如用DAO层的数据库更省代码。
