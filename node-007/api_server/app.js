@@ -15,6 +15,5 @@ var demo_1 = require('./moudles/demo_1/index.js');
 new demo_1(app).init();
 
 
-
-
 app.listen(1010);
+console.log('server running at 1010');

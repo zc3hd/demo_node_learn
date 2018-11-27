@@ -59,7 +59,9 @@ Data.prototype = {
 
             if (doc != null) {
               arr.push(doc);
-            } else {
+            } 
+            // 
+            else {
               resolve(arr);
               db.close();
             }
@@ -130,7 +132,6 @@ Data.prototype = {
     });
   },
 };
-
 
 
 module.exports = Data;
