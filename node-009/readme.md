@@ -36,7 +36,7 @@ var mongoose = require('mongoose');
 【这里引入，一会用】
 var db = require("./db.js");
 
-【其实】我感觉，这应该叫创建一个DOC模型
+【其实】创建一个文档模型
 var studentSchema = new mongoose.Schema({
     name     :  {type : String},
     age      :  {type : Number},
@@ -44,7 +44,7 @@ var studentSchema = new mongoose.Schema({
 });
 
 
-【静态方法】说的是静态方法，其实就是集合方法么
+【静态方法】说的是静态方法，只能通过模型上使用。
 studentSchema.statics.zhaoren = function(name, callback) {
     this.model('Student').find({name: name}, callback);
 };
@@ -52,7 +52,7 @@ studentSchema.statics.xiugai = function(conditions,update,options,callback){
     this.model("Student").update(conditions, update, options, callback);
 }
 
-【这个其实就是绑定】绑定数据库的那个集合！
+【这个其实就是绑定】绑定集合标识，成为模型。
 var studentModel = db.model('Student', studentSchema);
 
 【向外暴露】用在api_业务模块内部。
@@ -82,6 +82,5 @@ Student.xiugai({"name":"小明"},{$set : {"age":30}},{},function(){
 
 ### 我的理解：
 * 和demo_7比较，其实就是分业务（api模块）操作数据库的集合。没有什么。
-* demo_7:因为所有操作数据库的集合的方法都写在db.js，在好多api业务模块的时候,可以写在一起。
-* 这个就是相当于单独写对应（api模块）的操作专门的集合面向对象构造函数了。我感觉要和业务模块写在一起会更好点。
-* 唉~~没有什么嘛，写的那么神秘。总体感觉其实不如用DAO层的数据库更省代码。
+* demo_7:因为所有操作数据库的集合的方法都写在db.js，在好多api业务模块的时候,一些专门的数据的操作可以写在db.js里。
+* mongoose就是相当于单独写对应（api模块）的操作专门的集合面向对象构造函数。我感觉要和业务模块写在一起会更好点。唉~~没有什么嘛，写的那么神秘。总体感觉mongoose不如用自己DAO层数据库更省代码。
