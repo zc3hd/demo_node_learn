@@ -73,7 +73,7 @@ app.get("/admin/login",function(req,res){
 });
 ```
 
-##### app.use()中间件
+##### app.use(fn) fn是中间件
 
 * 这里引出了中间件，我们前面的get,post,use表现为一个路由，接着后面的fn就是一个中间件。
 * 中间件很注意顺序，所以有next进行配合
@@ -135,11 +135,12 @@ app.post("/",function(req,res){
 });
 ```
 
-##### 项目
+### express服务（对应demo-03）
 
 * 自己使用，绝不会使用ejs模板引擎，前后端分离，node只是提供后台的路由API功能。
 * 项目的目录：目标是为了和vue-webpack-express前后一起开发，现在把demo-webpack-003中vue打包后的webapp全部拿过来。
 
+##### 1.工程目录：
 ```
 webapp 【里面就是各个模块的文件】
  - js_demo 【api写在内部】
@@ -149,7 +150,26 @@ api_server:
  - js_demo: 【专门给webapp里js_demo提供api服务。理念和webapp下模块一样，api写在内部进行管理，不要什么MVC】
 ```
 
-* api文件向外暴露一个构造函数，app.js使用就可以了
+##### 2.静态资源和api引入：
+* app.js里面主要是提供静态资源服务，引入api模块，启动服务。
+```
+var express = require("express");
+var app = express();
+var path = require('path');
+
+
+app.use(express.static(path.join(__dirname,"../webapp/")));
+
+// api
+var js_demo = require('./js_demo/index.js');
+new js_demo(app).init();
+
+ 
+app.listen(1010);
+```
+
+##### 3.api模块：
+* api模块文件在app.js使用，向外暴露一个构造函数：
 ```
 api_server/js_demo/index.js:
 
@@ -175,16 +195,15 @@ JS_demo.prototype = {
 module.exports = JS_demo;
 ```
 
-```
-var js_demo = require('./js_demo/index.js');
-new js_demo(app).init();
-```
+* 写到这的时候，这和demo-03完全对应。是不是express让业务更专注？
+
+-----------------------
 
 ### 问题1：
-* 1.目前自己的gulp框架适合纯JS工程，那么gulp如何引入express的服务？就是前端用gulp进行实时编译，后台用node
-* 答：这个问题已经解决了。见下面的demo。
+* 【?】gulp+express 如何搭建?
+* 答：见下面的demo-05。对比demo-03/04下拉：demo-05的工具完全可以使用为【gulp+node】/【gulp+express】
 
 ### 问题2：
-* 为webpack-express前后一起开发的工具在哪里？
+* 【?】webpack+express 如何搭建?
 * 答：demo-012
 
