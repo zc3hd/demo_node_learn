@@ -7,7 +7,7 @@
 npm install mongodb@2.0.43
 ```
 
-* 这里是DB在node端作为用户端向mongoDB数据库发出请求，有响应，是个回调。使用：
+* 这里是DB在node端，作为用户端向mongoDB数据库发出请求，有响应，是个回调。使用：
 ```
 var MongoClient = require('mongodb').MongoClient;
 
@@ -35,19 +35,19 @@ app.get("/",function(req,res){
 ```
 
 
-### DAO封装
+### DAO封装（老师）
 
-* DAO：data access object数据访问对象，就是把数据库的操作和业务分开，专注于数据库的业务。
-
+* DAO：data access object 【数据访问对象】
+* 把数据库的业务和【api】业务分开，专注于数据库的业务。
+* 不管数据库什么操作，都是先连接数据库，所以我们可以把连接数据库，封装成为内部函数。
 ```
-//这个模块里面封装了所有对数据库的常用操作
 var MongoClient = require('mongodb').MongoClient;
 var settings = require("../settings.js");
-//不管数据库什么操作，都是先连接数据库，所以我们可以把连接数据库
-//封装成为内部函数
+
 function _connectDB(callback) {
-  var url = settings.dburl; //从settings文件中，都数据库地址
-  //连接数据库
+  【从settings文件中，都数据库地址】
+  var url = settings.dburl;
+
   MongoClient.connect(url, function(err, db) {
     if (err) {
       callback(err, null);
@@ -57,7 +57,6 @@ function _connectDB(callback) {
   });
 }
 
-//插入数据
 exports.insertOne = function(collectionName, json, callback) {
   _connectDB(function(err, db) {
     db
@@ -70,10 +69,9 @@ exports.insertOne = function(collectionName, json, callback) {
 };
 ```
 
+### db.api
+##### 1.insertOne
 
-### 新增
-
-* insertOne
 ```
 db
   .collection(collectionName)
@@ -83,7 +81,7 @@ db
   });
 ```
 
-### 查找
+##### 2.find
 
 * 查询条件和shell版一毛一样。
 * 分页、排序、游标
@@ -117,7 +115,7 @@ cursor.each(function(err, doc) {
 
 ```
 
-### 修改
+##### 3.updateMany
 
 ```
 db
@@ -140,7 +138,7 @@ db
   },
 ```
 
-### 删除
+##### 4.deleteMany
 
 ```
 db
@@ -154,7 +152,7 @@ db
   );
 ```
 
-### 读取总数
+##### 5.count({})
 
 ```
 db
@@ -166,14 +164,14 @@ db
   });
 ```
 
-### index索引
+##### 6.index索引
 
 * 初始化的时候执行一次就行,用法就是保证那个字段不能重复吧。
 ```
 db.collection('student').createIndex(
   { "name": 1 },
-
   {unique: true},
+
   function(err, results) {
     console.log(results);
     callback();
@@ -181,13 +179,12 @@ db.collection('student').createIndex(
 );
 ```
 
-### 没有外键，叫聚合
+##### 没有外键，叫聚合
 
 * 一个表的数据的一个字段，链接着另外一个表的一条数据。
 
-
-### 数据库地址配置项
-
+##### 数据库地址配置项
+* 这个数据库test其实就是我们目录下，项目的数据库。
 ```
 【这就是选择了数据库（已经是开机在某个具体的文件夹路径，里面是好多数据库）】
 module.exports = {
@@ -195,15 +192,17 @@ module.exports = {
 }
 ```
 
-* 这个数据库test其实就是我们目录下，项目的数据库。
 
 
-### 项目
+---------------------
 
-* 数据唯一ID：index的包装
+
+
+### DAO封装（自己）
+
+* 数据唯一ID的包装
 ```
 var ObjectId = require('mongodb').ObjectID;
-
 {"_id":ObjectId(id)}
 ```
 
@@ -227,14 +226,11 @@ res.redirect("/");
    -scripts
      --db.js
 
-
 _webapp
   -moudules
      -demo_1
    -scripts
 ```
-
-* 可以看到后台的api提供的模块方式完全是按照前端的功能模块进行提供，这样前后都好维护，不要和我说什么MVC，都是扯淡，适合自己才是最好的。
 
 #### 1. db.js【dao层的封装】面向对象写法
 ```
@@ -263,7 +259,7 @@ JS_demo.prototype = {};
 module.exports = JS_demo;
 ```
 
-#### 3.db.js【dao层的封装】连接、增删改查的promise的封装
+#### 3.db.js【dao层的封装】连接、增删改查promise的封装
 ```
   _connect: function() {
     var me = this;
@@ -274,7 +270,8 @@ module.exports = JS_demo;
         });
     });
   },
-    // 新增
+  
+  // 新增
   add: function(collection_name, obj) {
     var me = this;
     return new Promise(function(resolve, reject) {

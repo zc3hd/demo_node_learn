@@ -2,8 +2,7 @@
 
 * 非结构性数据库，面向对象写的，无法挑战老牌数据库，NOSQL。
 * SQL 数据库/表/行（就是一条条的数据，键值对）
-* noSQL 数据库/集合/文档
-* 里面存放都是JSON
+* noSQL 数据库/集合/文档，里面存放都是JSON
 
 ### 1.安装
 
@@ -24,15 +23,15 @@ mongoimport  导入数据
 ### 2.开机
 
 ```
---dbpath 就是选择数据库文档所在的文件夹。
+--dbpath 就是选择数据库即将所在的文件夹。
 
+【普通开机】
 mongod --dbpath C:\dev\mongoDB_data\test
 
 【mongoVUE 数据库开机】
 mongod --storageEngine mmapv1 --dbpath C:\dev\mongoDB_data\cc_datas
 ```
 * C:\dev\mongoDB_data\test就是所有数据库存放的位置，可以任意设置。里面的dbs，就是真正数据库的名称。
-
 
 ### 3.指令[shell版]
 
@@ -53,7 +52,7 @@ db.dropDatabase();
 --删除当前数据库
 ```
 
-#### 增加数据
+##### 3.1 insert
 
 ```
 【插入一条数据】
@@ -72,7 +71,7 @@ mongoimport --db test --collection restaurants --drop --file primer-dataset.json
 --file primer-dataset. 【要导入哪个本地本机】
 ```
 
-#### find()
+##### 3.2 find()
 
 * find()
 ```
@@ -111,7 +110,7 @@ db.student.stats();
 db.student.find().count();
 ```
 
-#### 修改
+##### 3.3 update
 
 * 暗含查找的命令 
 
@@ -131,7 +130,7 @@ db.student.update({},{$set:{"age":23}},{multi:ture})
 db.student.update({"name":"xiaom"},{"age":16});
 ```
 
-#### 删除
+##### 3.4 remove
 
 ```
 【删除一个集合，集合就没有了】
@@ -147,7 +146,7 @@ db.student.remove({"name":'xiaom'},{})
 db.restaurants.remove( { "borough": "Queens" }, { justOne: true } )
 ```
 
-#### index索引
+##### 3.5 index索引
 
 * 设置name为该集合的正向的索引。
 ```
@@ -161,9 +160,6 @@ db.student.createIndex({"name":1});
 ```
 db.members.createIndex( { "user_id": 1 }, { unique: true } );
 ```
-
-
-
 
 ### 4.mongoVUE 可视化
 
