@@ -220,7 +220,7 @@ me.Demo_model
 ```
 
 
-------
+---------------------------------
 
 ### Router的设计
 
@@ -234,6 +234,21 @@ me.router.post('/add.do', function(req, res) {
 });
 
 me.app.use('/api/book',me.router);
+```
+
+### 全局参数配置
+
+```
+module.exports = {
+  // 数据库名称
+  db:"test",
+
+  // 测试模式下的端口
+  dev_port:1011,
+
+  // 打包后/测试时被代理的端口
+  api_port:1010,
+}
 ```
 
 * 至此，基本上就可以了，接下来就是项目。

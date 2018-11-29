@@ -2,13 +2,14 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
+var conf = require('../conf.js');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/' + conf.db);
 
 
 // 链接数据库
 mongoose.connection.once('open', function() {
-  console.log("数据库开启");
+  console.log(conf.db + "数据库->开启");
   // 提供静态文件
   app.use(express.static(path.join(__dirname, '../webapp/')));
   // post
@@ -28,7 +29,7 @@ mongoose.connection.once('open', function() {
   new label(app).init();
 
 
-  app.listen(1010);
+  app.listen(conf.api_port);
 
-  console.log("服务开启");
+  console.log("server running at " + conf.api_port);
 });
