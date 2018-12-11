@@ -87,7 +87,7 @@ app.use("/admin",function(req,res){
 });
 ```
 
-* 这里就可以用app.use()写一个类似静态服务的中间件
+* 用app.use()写一个类似静态服务的中间件
 ```
 app.use(haha);
 function haha(req,res,next){
@@ -128,6 +128,7 @@ app.use(function(req,res){
 【bodyParser@1.14.0】
 var bodyParser = require('body-parser')
 
+【这个老师教的有误，这是对urlencoded进行解码】
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post("/",function(req,res){
@@ -135,7 +136,7 @@ app.post("/",function(req,res){
 });
 ```
 
-### express服务（对应demo-03）
+### express服务项目（对应demo-03的项目思想）
 
 * 自己使用，绝不会使用ejs模板引擎，前后端分离，node只是提供后台的路由API功能。
 * 项目的目录：目标是为了和vue-webpack-express前后一起开发，现在把demo-webpack-003中vue打包后的webapp全部拿过来。
@@ -201,7 +202,7 @@ module.exports = JS_demo;
 
 ### 问题1：
 * 【?】gulp+express 如何搭建?
-* 答：见下面的demo-05。对比demo-03/04下拉：demo-05的工具完全可以使用为【gulp+node】/【gulp+express】
+* 答：见下面的demo-05。对比demo-03/04学习。
 
 ### 问题2：
 * 【?】webpack+express 如何搭建?

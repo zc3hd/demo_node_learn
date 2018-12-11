@@ -36,7 +36,7 @@ var mongoose = require('mongoose');
 【这里引入，一会用】
 var db = require("./db.js");
 
-【其实】创建一个文档模型
+【其实】创建一个【文档模型】
 var studentSchema = new mongoose.Schema({
     name     :  {type : String},
     age      :  {type : Number},

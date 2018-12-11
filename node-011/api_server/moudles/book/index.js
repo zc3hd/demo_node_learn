@@ -158,7 +158,7 @@ JS_demo.prototype = {
 
       })
       .then(function(result) {
-        // 随机选2个人
+        // 随机选2个标签
         var sel_index_1 = Math.floor(Math.random() * result.length / 2) + 0;
         var sel_index_2 = Math.floor(Math.random() * result.length / 2) + Math.floor(result.length / 2);
         var label_1_id = result[sel_index_1]._id;
